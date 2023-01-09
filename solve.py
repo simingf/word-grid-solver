@@ -1,7 +1,4 @@
 from trie import *
-import random
-import string
-import copy
 
 game = [['r', 'q', 'u', 'i'],
         ['e', 'i', 'n', 'c'],
@@ -45,29 +42,26 @@ def get_neighbors(x, y):
                 neighbors.append((i,j))
     return neighbors
 
-"""
-def make_grid():
-    for i in range(4):
-        for j in range(4):
-            randomLetter = random.choice(string.ascii_letters)
-            grid[i][j] = randomLetter
-"""
-
 def print_answers():
+    print("Press enter for next answer")
     for i in range(len(answers)):
+        input()
         print(answers[i])
-        print_char_path(paths[i])
+        print_path(paths[i])
 
-def print_char_path(path):
-    print("+---+---+---+---+")
+def print_path(path):
+    print("+---+---+---+---+ +---+---+---+---+")
     for i in range(4):
+        pos = [' ', ' ', ' ', ' ']
         for j in range(4):
             if (i, j) in path:
+                pos[j] = str(path.index((i,j)) + 1)
                 print("| " + game[i][j] + " ", end="")
             else:
                 print("|   ", end="")
-        print("|")
-        print("+---+---+---+---+")
+        print("|", end=" ")
+        print("| " + pos[0] + " | " + pos[1] + " | " + pos[2] + " | " + pos[3] + " |")
+        print("+---+---+---+---+ +---+---+---+---+")
 
 if __name__ == "__main__":
     root = TrieNode()
