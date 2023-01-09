@@ -17,7 +17,7 @@ def solve(root):
             solve_recurse(current_node, i, j, game[i][j], visited)
     
 def solve_recurse(node, x, y, word, visited):
-    if is_endword(node) and 8 >= len(word) >= 3 :
+    if is_endword(node):
         answers.append(word)
         paths.append(visited)
 

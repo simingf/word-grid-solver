@@ -29,4 +29,5 @@ def get_words():
 def make_tree(root):
     dictionary = get_words()
     for word in dictionary:
-        insert(root,word)
+        if 3 <= len(word) <= 8:
+            insert(root,word)
