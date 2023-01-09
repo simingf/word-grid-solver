@@ -8,8 +8,7 @@ def insert(root, key):
     for char in key:
         pos = ord(char) - ord('a')
         if current_node.children[pos] == None:
-            new_node = TrieNode()
-            current_node.children[pos] = new_node
+            current_node.children[pos] = TrieNode()
         current_node = current_node.children[pos]
     current_node.endWord = True
 
@@ -47,3 +46,4 @@ if __name__ == "__main__":
     make_tree(root)
     print(get_node(root, "hello"))
     print(get_node(root, "asdf"))
+    print(is_endword(get_node(root,"tre")))
