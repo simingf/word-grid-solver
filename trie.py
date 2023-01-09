@@ -12,3 +12,13 @@ class TrieNode:
                 current_node.children[ord(char)] = new_node
             current_node = current_node.children[ord(char)]
         current_node.endWord = True
+
+    def is_valid_key(root, key):
+        current_node = root
+        for char in key:
+            if current_node.children[ord(char) - ord('a')] == None:
+                return False
+            current_node = node.children[ord(char)]
+        if current_node.endWord:
+            return True
+        return False
