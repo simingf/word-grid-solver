@@ -1,12 +1,27 @@
 from trie import *
 
-game = [['r', 'q', 'u', 'i'],
-        ['e', 'i', 'n', 'c'],
-        ['e', 'd', 'b', 'l'],
-        ['n', 't', 'm', 'k']]
+#config
+num_rows = 4
+num_cols = 4
+multiple_paths_allowed = False
 
+#global vars
+game = []
 answers = []
 paths = []
+
+def make_game():
+    global game 
+    rows = 0
+    i = None
+    while rows < num_rows:
+        i = input()
+        if len(i) != num_cols:
+            print("Invalid input, try again")
+            continue
+        else:
+            rows += 1
+            game.append(list(i))    
 
 def solve(root):
     for i in range(4):
@@ -17,7 +32,7 @@ def solve(root):
             solve_recurse(current_node, i, j, game[i][j], visited)
     
 def solve_recurse(node, x, y, word, visited):
-    if is_endword(node):
+    if is_endword(node) and (multiple_paths_allowed or word not in answers):
         answers.append(word)
         paths.append(visited)
 
@@ -41,6 +56,10 @@ def get_neighbors(x, y):
             else:
                 neighbors.append((i,j))
     return neighbors
+
+def sort_answers():
+    global answers, paths
+    answers, paths = zip(*sorted(zip(answers, paths), key=lambda x: len(x[0]), reverse=True))
 
 def print_answers():
     print("Press enter for next answer")
@@ -66,5 +85,7 @@ def print_path(path):
 if __name__ == "__main__":
     root = TrieNode()
     make_tree(root)
+    make_game()
     solve(root)
+    sort_answers()
     print_answers()
